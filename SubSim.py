@@ -39,6 +39,9 @@ def Convert_Angle_Rad_To_Deg(angle_rad):
 def Convert_Angle_Deg_To_Rad(angle_deg):
     return angle_deg / 57.2958
 
+def Calc_Force_Drag(fluid_density, obj_velocity, surface_area, drag_coeff):
+    return -0.5 * fluid_density * obj_velocity * obj_velocity * surface_area * drag_coeff
+
 def Limit_Angle(angle_rad, angle_min, angle_max):
     if (angle_rad < angle_min):
         return angle_max
