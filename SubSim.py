@@ -18,7 +18,6 @@ import pygame.freetype  # Import the freetype module.
 # Z: down -ve, up +ve
 
 s_hdg = 0
-s_depth = 0
 
 w_vec_vel = [0, 0, 0]
 w_total_velocity = 0
@@ -72,14 +71,19 @@ while True:
         '\nX Vel: ' + str(round(w_vec_vel[0], 2)) + \
         '\nY Vel: ' + str(round(w_vec_vel[1], 2)) + \
         '\nZ Vel: ' + str(round(w_vec_vel[2], 2)) + \
-        '\nTotal: ' + str(round(w_total_velocity, 2)) + \
-        '\nDEPTH: ' + str(round(s_depth, 2)) + \
+        '\nTotal Vel.: ' + str(round(w_total_velocity, 2)) + \
+        '\nX Pos: ' + str(round(w_vec_pos[0], 2)) + \
+        '\nY Pos: ' + str(round(w_vec_pos[1], 2)) + \
+        '\nZ Pos: ' + str(round(w_vec_pos[2], 2)) + \
         '\nHDG: ' + str(round(Convert_Angle_Rad_To_Deg(s_hdg), 2))
     
     s_hdg = Limit_Angle(s_hdg, 0, 2*math.pi)
 
     w_vec_vel[0] = w_total_velocity * math.cos(s_hdg)
     w_vec_vel[1] = w_total_velocity * math.sin(s_hdg)
+
+    w_vec_pos[0] = w_vec_pos[0] + w_vec_vel[0] * dt
+    w_vec_pos[1] = w_vec_pos[1] + w_vec_vel[1] * dt
 
     keys=pygame.key.get_pressed()
 
