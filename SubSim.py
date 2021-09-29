@@ -88,16 +88,16 @@ while True:
     keys=pygame.key.get_pressed()
 
     if keys[pygame.K_w]:
-        w_total_velocity = w_total_velocity + 0.1
+        w_total_velocity = w_total_velocity + 0.01
 
     if keys[pygame.K_s]:
-        w_total_velocity = w_total_velocity - 0.1
+        w_total_velocity = w_total_velocity - 0.01
 
     if keys[pygame.K_a]:
-        s_hdg = s_hdg - 0.1
+        s_hdg = s_hdg - 0.01
 
     if keys[pygame.K_d]:
-        s_hdg = s_hdg + 0.1
+        s_hdg = s_hdg + 0.01
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
