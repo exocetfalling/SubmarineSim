@@ -63,9 +63,6 @@ def blit_text(surface, text, pos, font, color=pygame.Color('green')):
         x = pos[0]  # Reset the x.
         y += word_height  # Start on new row.
 
-w_vec_vel[0] = w_total_velocity * math.cos(s_hdg)
-w_vec_vel[1] = w_total_velocity * math.sin(s_hdg)
-
 font = pygame.font.SysFont('Courier', 16)
 
 while True:
@@ -79,7 +76,10 @@ while True:
         '\nDEPTH: ' + str(round(s_depth, 2)) + \
         '\nHDG: ' + str(round(Convert_Angle_Rad_To_Deg(s_hdg), 2))
     
+    s_hdg = Limit_Angle(s_hdg, 0, 2*math.pi)
 
+    w_vec_vel[0] = w_total_velocity * math.cos(s_hdg)
+    w_vec_vel[1] = w_total_velocity * math.sin(s_hdg)
 
     keys=pygame.key.get_pressed()
 
