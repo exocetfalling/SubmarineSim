@@ -19,6 +19,8 @@ import pygame.freetype  # Import the freetype module.
 
 s_hdg = 0
 
+water_density = 997
+
 w_vec_vel = [0, 0, 0]
 w_total_velocity = 0
 
