@@ -20,15 +20,8 @@ import pygame.freetype  # Import the freetype module.
 s_hdg = 0
 s_depth = 0
 
-w_x_velocity = 0
-w_y_velocity = 0
-w_z_velocity = 0
-
+w_vec_vel = [0, 0, 0]
 w_total_velocity = 0
-
-w_x_pos = 0
-w_y_pos = 0
-w_z_pos = 0
 
 w_vec_pos = [0, 0, 0]
 
@@ -70,7 +63,8 @@ def blit_text(surface, text, pos, font, color=pygame.Color('green')):
         x = pos[0]  # Reset the x.
         y += word_height  # Start on new row.
 
-
+w_vec_vel[0] = w_total_velocity * math.cos(s_hdg)
+w_vec_vel[1] = w_total_velocity * math.sin(s_hdg)
 
 font = pygame.font.SysFont('Courier', 16)
 
@@ -78,20 +72,22 @@ while True:
 
     dt = clock.tick(FPS) / 1000
     debug_text = \
-        '\nX Vel: ' + str(round(w_x_velocity, 2)) + \
-        '\nY Vel: ' + str(round(w_y_velocity, 2)) + \
-        '\nZ Vel: ' + str(round(w_z_velocity, 2)) + \
+        '\nX Vel: ' + str(round(w_vec_vel[0], 2)) + \
+        '\nY Vel: ' + str(round(w_vec_vel[1], 2)) + \
+        '\nZ Vel: ' + str(round(w_vec_vel[2], 2)) + \
         '\nTotal: ' + str(round(w_total_velocity, 2)) + \
         '\nDEPTH: ' + str(round(s_depth, 2)) + \
         '\nHDG: ' + str(round(Convert_Angle_Rad_To_Deg(s_hdg), 2))
+    
+
 
     keys=pygame.key.get_pressed()
 
     if keys[pygame.K_w]:
-        s_depth = s_depth - 0.1
+        w_total_velocity = w_total_velocity + 0.1
 
     if keys[pygame.K_s]:
-        s_depth = s_depth + 0.1
+        w_total_velocity = w_total_velocity - 0.1
 
     if keys[pygame.K_a]:
         s_hdg = s_hdg - 0.1
