@@ -33,7 +33,7 @@ w_vec_acc = [0, 0, 0]
 w_vec_vel = [0, 0, 0]
 w_total_velocity = 0
 
-w_vec_pos = [0, 0, -1000]
+w_vec_pos = [0, 0, -100]
 
 pygame.init()
 SIZE = WIDTH, HEIGHT = (1024, 720)
@@ -130,10 +130,10 @@ while True:
         s_hdg = s_hdg + 0.01
 
     if keys[pygame.K_u]:
-        s_ballast = s_ballast - 1
+        s_ballast = s_ballast - 0.2
 
     if keys[pygame.K_j]:
-        s_ballast = s_ballast + 1
+        s_ballast = s_ballast + 0.2
 
 
     for event in pygame.event.get():
