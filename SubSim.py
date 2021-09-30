@@ -35,6 +35,8 @@ w_total_velocity = 0
 
 w_vec_pos = [0, 0, -100]
 
+d_screen_size = [0, 0]
+d_screen_ctr = [0, 0]
 toggle_debug = 1
 
 white = (255,255,255)
@@ -155,9 +157,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
-
-    pygame.draw.rect(screen, red, (400,400,50,25))
-    pygame.draw.circle(screen, white, (150,150), 75)
+    
+    d_screen_size = pygame.display.get_window_size()
+    d_screen_ctr = d_screen_size / 2
+    #pygame.draw.rect(screen, red, (400,400,50,25))
+    pygame.draw.circle(screen, white, (d_screen_size[0],d_screen_size[1]), 75)
     #screen.fill(pygame.Color('black'))
     if (toggle_debug == 1):
         blit_text(screen, debug_text, (20, 20), font)
