@@ -37,6 +37,13 @@ w_vec_pos = [0, 0, -100]
 
 toggle_debug = 1
 
+white = (255,255,255)
+black = (0,0,0)
+
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+
 pygame.init()
 SIZE = WIDTH, HEIGHT = (1024, 720)
 FPS = 60
@@ -149,7 +156,9 @@ while True:
         if event.type == pygame.QUIT:
             quit()
 
-    screen.fill(pygame.Color('black'))
+    pygame.draw.rect(screen, red, (400,400,50,25))
+    pygame.draw.circle(screen, white, (150,150), 75)
+    #screen.fill(pygame.Color('black'))
     if (toggle_debug == 1):
         blit_text(screen, debug_text, (20, 20), font)
     
