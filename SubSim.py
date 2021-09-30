@@ -35,6 +35,8 @@ w_total_velocity = 0
 
 w_vec_pos = [0, 0, -100]
 
+toggle_debug = 1
+
 pygame.init()
 SIZE = WIDTH, HEIGHT = (1024, 720)
 FPS = 60
@@ -135,11 +137,20 @@ while True:
     if keys[pygame.K_j]:
         s_ballast = s_ballast + 0.2
 
+    
+    if keys[pygame.K_o]:
+        toggle_debug = 1
+    
+    if keys[pygame.K_p]:
+        toggle_debug = 0
+
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
 
     screen.fill(pygame.Color('black'))
-    blit_text(screen, debug_text, (20, 20), font)
+    if (toggle_debug == 1):
+        blit_text(screen, debug_text, (20, 20), font)
+    
     pygame.display.update()
