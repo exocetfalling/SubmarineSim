@@ -4,8 +4,8 @@ import math
 from typing import cast
 import pygame
 from pygame import image
-import pygame.freetype
-from pygame.math import disable_swizzling  # Import the freetype module.
+import pygame.freetype  # Import the freetype module.
+from pygame.math import disable_swizzling
 
 # Variables
 # Axes are defined as:
@@ -22,11 +22,15 @@ from pygame.math import disable_swizzling  # Import the freetype module.
 c_sub_dimensions = [4, 5, 2]
 c_sub_mass = 10000
 c_sub_vol = 40
-
+c_sub_drag_area = [8, 10, 8]
 c_ballast_vol_max = 20
+c_sub_prop_radius = 1
+c_sub_max_exit_vel = 20
 
 s_hdg = 0
 s_ballast = 0 # vol filled with water.
+
+s_vec_acc = [0, 0, 0]
 
 water_density = 1000
 
@@ -70,6 +74,9 @@ def Calc_Force_Thrust(fluid_density, prop_radius, entry_vel, exit_vel):
 
 def Calc_Force_Drag(fluid_density, obj_velocity, surface_area, drag_coeff):
     return -0.5 * fluid_density * obj_velocity * obj_velocity * surface_area * drag_coeff
+
+def Calc_Acc(force, mass):
+    return force / mass
 
 def Limit_Angle(angle_rad, angle_min, angle_max):
     if (angle_rad < angle_min):
@@ -122,7 +129,12 @@ while True:
     
     s_hdg = Limit_Angle(s_hdg, 0, 2*math.pi)
     
-    w_vec_acc[2] = ((Calc_Buoyant_force(c_sub_vol, s_ballast, water_density)) / c_sub_mass - 9.81) - 10 * w_vec_vel[2]
+    s_vec_acc[1] = \
+        Calc_Acc(Calc_Force_Thrust(water_density, c_sub_prop_radius, w_total_velocity, c_sub_max_exit_vel), c_sub_mass) + \
+        Calc_Acc(Calc_Force_Drag(water_density, w_total_velocity, c_sub_drag_area[1], 1.0))
+    w_vec_acc[2] = \
+        ((Calc_Buoyant_force(c_sub_vol, s_ballast, water_density)) / c_sub_mass - 9.81) + \
+        -10 * w_vec_vel[2]
 
     w_vec_vel[0] = w_total_velocity * math.cos(s_hdg)
     w_vec_vel[1] = w_total_velocity * math.sin(s_hdg)
