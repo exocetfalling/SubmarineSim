@@ -3,6 +3,7 @@
 import math
 from typing import cast
 import pygame
+from pygame import image
 import pygame.freetype
 from pygame.math import disable_swizzling  # Import the freetype module.
 
@@ -46,12 +47,16 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 
+i_compass = ''
+i_size = [0, 0]
+
 pygame.init()
 SIZE = WIDTH, HEIGHT = (1024, 720)
 FPS = 60
 screen = pygame.display.set_mode(SIZE, pygame.RESIZABLE)
 clock = pygame.time.Clock()
-
+i_compass = pygame.image.load('compass.png')
+i_size = pygame.Surface.get_size(i_compass)
 # Functions
 def Convert_Angle_Rad_To_Deg(angle_rad):
     return angle_rad * 57.2958
@@ -159,11 +164,14 @@ while True:
             quit()
     
     d_screen_size = pygame.display.get_window_size()
-    d_screen_ctr = d_screen_size / 2
+    d_screen_ctr = [(d_screen_size[0] / 2), (d_screen_size[1] / 2)]
     #pygame.draw.rect(screen, red, (400,400,50,25))
-    pygame.draw.circle(screen, white, (d_screen_size[0],d_screen_size[1]), 75)
-    #screen.fill(pygame.Color('black'))
+    #pygame.draw.circle(screen, white, (d_screen_ctr[0],d_screen_ctr[1]), 75)
+    
+    screen.blit(i_compass, (d_screen_ctr[0] - i_size[0] / 2, d_screen_ctr[1] - i_size[1] / 2))
+
     if (toggle_debug == 1):
+        screen.fill(pygame.Color('black'))
         blit_text(screen, debug_text, (20, 20), font)
     
-    pygame.display.update()
+    pygame.display.flip()
