@@ -168,7 +168,7 @@ while True:
     d_screen_ctr = [(d_screen_size[0] / 2), (d_screen_size[1] / 2)]
     #pygame.draw.rect(screen, red, (400,400,50,25))
     #pygame.draw.circle(screen, white, (d_screen_ctr[0],d_screen_ctr[1]), 75)
-    
+    pygame.transform.rotate(i_compass, -Convert_Angle_Rad_To_Deg(s_hdg))
     screen.blit(i_compass, (d_screen_ctr[0] - i_size[0] / 2, d_screen_ctr[1] - i_size[1] / 2))
 
     if (toggle_debug == 1):
