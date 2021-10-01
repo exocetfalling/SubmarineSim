@@ -57,6 +57,7 @@ screen = pygame.display.set_mode(SIZE, pygame.RESIZABLE)
 clock = pygame.time.Clock()
 i_compass = pygame.image.load('compass.png')
 i_size = pygame.Surface.get_size(i_compass)
+pygame.Surface.set_colorkey(i_compass, white)
 # Functions
 def Convert_Angle_Rad_To_Deg(angle_rad):
     return angle_rad * 57.2958
